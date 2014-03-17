@@ -17,12 +17,12 @@ function rex_b1_opf_lang($params)
     
     for ($i = 0; $i < $rows; $i++, $sql->next()) {
 
-        $srch[] = $REX['ADDON']['opf_lang']['open_tag'] . $sql->getValue('wildcard') . $REX['ADDON']['opf_lang']['close_tag'];
+        $srch[] = '@' . preg_quote(trim($REX['ADDON']['opf_lang']['open_tag'])) . '\s*' . $sql->getValue('wildcard') . '\s*' . preg_quote(trim($REX['ADDON']['opf_lang']['close_tag'])) . '@';
         $rplc[] = nl2br($sql->getValue('replacement'));
 
     }
     
-    return str_replace($srch, $rplc, $content);
+    return preg_replace($srch, $rplc, $content);
     
 }
 ?>

@@ -190,6 +190,26 @@ class rex_form_extended extends rex_form
 			return parent::save();
 		}
   }
+
+    function delete()
+    {
+
+        if (isset($this->languageDependent['id']) AND isset($this->languageDependent['clang']))
+        {
+            $sql = rex_sql::factory();
+            $sql->setQuery('SELECT ' . $this->languageDependent['id'] . ' FROM ' . $this->tableName . ' WHERE ' . $this->whereCondition . ' LIMIT 1');
+
+            if ($sql->getRows() == 1) {
+                $id = $sql->getValue($this->languageDependent['id']);
+
+                $this->whereCondition = $this->languageDependent['id'] . '=' . $id;
+            }
+
+            echo $this->whereCondition;
+        }
+
+        return parent::delete();
+    }
   
   
   function getTimestampElements()

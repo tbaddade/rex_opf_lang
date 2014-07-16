@@ -80,8 +80,7 @@ if($func == "add" || $func == "edit")
 	}
 	
 	// Sprachabhaengige Felder hinzufuegen
-	if($func == 'add')
-		$form->setLanguageDependent($prefix_field.'id', $prefix_field.'clang');
+	$form->setLanguageDependent($prefix_field.'id', $prefix_field.'clang');
 		
 	
 	if ($func == 'add')
